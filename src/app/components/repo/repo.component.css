@@ -1,0 +1,37 @@
+.repo-search {
+    text-align: center;
+}
+.repo-img {
+    width: 100px;
+    height: 100px;
+    margin: 15px 0;
+    box-shadow:0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
+}
+
+.repo-link {
+    display: block;
+}
+
+.repo-name {
+    display: inline-block;
+}
+
+:host/deep/ ul.ngx-pagination.ng-star-inserted {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@media only screen and (max-width: 500px) {
+    .repo-issues {
+        display: none;
+    }
+    .repo-img {
+        display: none;
+    }
+    .repo-link {
+        display: none;
+    }
+}

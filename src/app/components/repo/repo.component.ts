@@ -8,19 +8,28 @@ import { DataService } from '../../services/data.service'
   providers: [DataService]
 })
 export class RepoComponent implements OnInit {
-  repos:any;
-  reponame:any;
-  constructor(private dataService:DataService) { }
+  repos: GitHubRepo[];
+  reponame: string;
+  constructor(private dataService: DataService) { }
 
-  ngOnInit() {
-    // this.dataService.getRepos().subscribe((repos) => {
-    //   this.repos = repos.items;
-    // });  
-  }
+  ngOnInit() { }
   search() {
     this.dataService.updateRepos(this.reponame);
     this.dataService.getRepos().subscribe(repos => {
-    this.repos = repos.items;
+      this.repos = repos.items;
     });
   }
+
+}
+interface GitHubRepo {
+  name: string;
+  owner: GitHubOwner[];
+  stargazers_count: number;
+  open_issues: number;
+  html_url: string;
+}
+
+interface GitHubOwner {
+  login: string;
+  avatar_url: string;
 }

@@ -1,15 +1,18 @@
-<form>
-  <input type="text" placeholder="Search" [(ngModel)]="reponame" (keyup.enter)="search()" name="reponame">
-  <button (click)="search()">Search</button>
-</form>
-
-<div *ngFor="let repo of repos | paginate: { itemsPerPage: 10, currentPage: p }">
-      <a href="{{repo.html_url}}" target="blank">{{repo.name}}</a>
-      <p>Owner: {{repo.owner.login}}</p>
-      <p>Stars: {{repo.stargazers_count}}</p>
-      <p *ngIf="repo.open_issues">Issues: {{repo.open_issues}}</p>
-      <img *ngIf="repo.owner.avatar_url" src="{{repo.owner.avatar_url}}" alt="{{repo.owner.login}} logo">
+<div class="repo-search">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Search Repo" [(ngModel)]="reponame" (keyup.enter)="search()" name="reponame">
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="search()">Search</button>
 </div>
-
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
-
+<div *ngIf="repos">
+  <mat-card *ngFor="let repo of repos | paginate: { itemsPerPage: 10, currentPage: p }">
+    <p mat-line class="repo-project">
+      <mat-card-subtitle class="repo-name">Project name:</mat-card-subtitle> {{ repo.name }}</p>
+    <p mat-line class="repo-author">Author: {{ repo.owner.login }}</p>
+    <p mat-line class="repo-stars">Stars: {{ repo.stargazers_count }}</p>
+    <p mat-line class="repo-issues">Issues: {{repo.open_issues}}</p>
+    <img mat-card-image class="repo-img" src="{{ repo.owner.avatar_url }}" alt="{{repo.owner.login}} avatar">
+    <a class="repo-link" href="{{ repo.html_url }}" target="blank">{{ repo.html_url }}</a>
+  </mat-card>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
